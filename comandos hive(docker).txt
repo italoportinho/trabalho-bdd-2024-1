@@ -1,0 +1,14 @@
+1) export HIVE_VERSION=4.0.0
+
+2) metastore:
+
+sudo docker run -d -p 9083:9083 --env SERVICE_NAME=metastore --name metastore-standalone apache/hive:${HIVE_VERSION}
+
+3) hiveserver:
+
+sudo docker run -d -p 10000:10000 -p 10002:10002 --env SERVICE_NAME=hiveserver2 --name hiveserver2-standalone apache/hive:${HIVE_VERSION}
+
+
+4) abrir hive command line:
+
+sudo docker exec -it hiveserver2-standalone beeline -u 'jdbc:hive2://0.0.0.0:10000/'
