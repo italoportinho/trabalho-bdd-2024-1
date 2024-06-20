@@ -12,3 +12,21 @@ sudo docker run -d -p 10000:10000 -p 10002:10002 --env SERVICE_NAME=hiveserver2 
 4) abrir hive command line:
 
 sudo docker exec -it hiveserver2-standalone beeline -u 'jdbc:hive2://0.0.0.0:10000/'
+
+5) Listar containers: 
+
+sudo docker ps -a
+
+6) Dar start em containers já criados que estejam parados:
+
+sudo docker start CONTAINER_ID
+
+o container ID pode ser obtido ao listar os containers existentes.
+
+7) Parar container:
+
+sudo docker stop CONTAINER_ID
+
+8) Remover container:
+
+sudo docker rm CONTAINER_ID
