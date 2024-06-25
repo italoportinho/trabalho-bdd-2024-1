@@ -1,0 +1,26 @@
+root@6b6dda51fdfb:/polroute# hive -f database_ddl_nofrag.hql 
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop-2.7.4/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+
+Logging initialized using configuration in file:/opt/hive/conf/hive-log4j2.properties Async: true
+OK
+Time taken: 2.122 seconds
+OK
+Time taken: 0.022 seconds
+OK
+Time taken: 0.147 seconds
+OK
+Time taken: 0.165 seconds
+OK
+Time taken: 0.153 seconds
+OK
+Time taken: 0.146 seconds
+OK
+Time taken: 0.164 seconds
+OK
+Time taken: 0.158 seconds
+root@6b6dda51fdfb:/polroute# 
+

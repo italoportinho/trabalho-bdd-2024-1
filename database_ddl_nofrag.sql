@@ -11,17 +11,34 @@ CREATE TABLE IF NOT EXISTS "time"(
     weekday string
 )
 
+    row format delimited
+    fields terminated by ';'
+    lines terminated by '\n'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+;
 CREATE TABLE IF NOT EXISTS neighborhood(
     id int,
     name string,
     geometry string
 )
 
+    row format delimited
+    fields terminated by ';'
+    lines terminated by '\n'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+;
+
 CREATE TABLE IF NOT EXISTS district(
     id int,
     name string,
     geometry string
 )
+
+    row format delimited
+    fields terminated by ';'
+    lines terminated by '\n'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+;
 
 CREATE TABLE IF NOT EXISTS vertice(
     id int,
@@ -31,6 +48,12 @@ CREATE TABLE IF NOT EXISTS vertice(
     zone_id int
 )
 
+    row format delimited
+    fields terminated by ';'
+    lines terminated by '\n'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+;
+
 CREATE TABLE IF NOT EXISTS segment(
     id int,
     geometry string,
@@ -39,6 +62,12 @@ CREATE TABLE IF NOT EXISTS segment(
     final_vertice_id int,
     start_vertice_id int
 )
+
+    row format delimited
+    fields terminated by ';'
+    lines terminated by '\n'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+;
 
 CREATE TABLE IF NOT EXISTS crime(
     id int,
@@ -53,3 +82,9 @@ CREATE TABLE IF NOT EXISTS crime(
     segment_id int,
     time_id int
 )
+
+    row format delimited
+    fields terminated by ';'
+    lines terminated by '\n'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+;
