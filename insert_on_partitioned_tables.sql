@@ -84,6 +84,34 @@ SELECT
 INSERT OVERWRITE TABLE crime_frag_2016
 SELECT 
     crime.* 
+    FROM crime, time_frag
+    WHERE crime.time_id = time_frag.id
+    and time_frag.year = 2016;
+
+INSERT OVERWRITE TABLE crime_frag_2015
+SELECT 
+    crime.* 
     FROM crime, time
     WHERE crime.time_id = time.id
-    and time.year = 2016;
+    and time.year = 2015;
+
+INSERT OVERWRITE TABLE crime_frag_2012
+SELECT 
+    crime.* 
+    FROM crime, time
+    WHERE crime.time_id = time.id
+    and time.year = 2012;
+
+INSERT OVERWRITE TABLE crime_frag_2017
+SELECT 
+    crime.* 
+    FROM crime, time
+    WHERE crime.time_id = time.id
+    and time.year = 2017;
+
+INSERT OVERWRITE TABLE crime_frag_2010
+SELECT 
+    crime.* 
+    FROM crime, time
+    WHERE crime.time_id = time.id
+    and time.year = 2010;

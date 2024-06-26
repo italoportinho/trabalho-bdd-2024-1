@@ -1,7 +1,8 @@
 ----------------------------------------------------------------------------------------------------------------
 -- QUERY 1:
 -- Qual o total de crimes por tipo e por segmento das ruas do distrito de IGUATEMI durante o ano de 2016?
--- Time taken: 72.778 seconds, Fetched: 926 row(s)
+-- Time taken: 72.778 seconds, Fetched: 926 row(s) UNION
+-- Time taken: 38.184 seconds, Fetched: 926 row(s) OR
 ----------------------------------------------------------------------------------------------------------------
 
 select
@@ -21,7 +22,7 @@ where
     time_frag.year = 2016
     and time_frag.id = crime_frag_2016.time_id
     and crime_frag_2016.segment_id = segment_frag_1.id
-    and segment_frag_1.start_vertice_id = vertice_frag_1.id
+    and (segment_frag_1.start_vertice_id = vertice_frag_1.id OR segment_frag_1.final_vertice_id = vertice_frag_1.id)
     and vertice_frag_1.district_id = district_frag.id
     and district_frag.name = 'IGUATEMI'
     group by crime_frag_2016.segment_id
@@ -47,4 +48,6 @@ time_frag.year = 2016
     and vertice_frag_1.district_id = district_frag.id
     and district_frag.name = 'IGUATEMI'
     group by crime_frag_2016.segment_id
+
+    ORDER BY segment_id
 ;
