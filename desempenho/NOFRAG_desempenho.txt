@@ -1,0 +1,83 @@
+NOFRAG
+
+query 1: Time taken: 58.165 seconds, Fetched: 923 row(s)
+query 2: Time taken: 57.297 seconds, Fetched: 1551 row(s)
+query 3: 
+Total MapReduce CPU Time Spent: 0 msec
+OK
+neighborhood.name	time.year	_c2	_c3	_c4	_c5
+Santa Efig�nia	2015	3935	3245	385	105
+Time taken: 51.848 seconds, Fetched: 1 row(s)
+
+query 4:
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 19928433166 HDFS Write: 0 SUCCESS
+Stage-Stage-3:  HDFS Read: 9987084716 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+ano	mao_dupla	feminicidio	homicidio	assassinato	lesao_corporal	furto_celular	roubo_celular	furto_carro	roubo_carro
+2012	yes	0	1625	160	0	210770	177610	80885	74665
+Time taken: 81.371 seconds, Fetched: 1 row(s)
+
+query 5:
+MapReduce Jobs Launched: 
+Stage-Stage-2:  HDFS Read: 15769473405 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+ano	furto_cel	roubo_cel	furto_carro	roubo_carro
+2017	421435	609435	214560	171480
+Time taken: 21.326 seconds, Fetched: 1 row(s)
+
+query 6:
+Time taken: 99.216 seconds, Fetched: 189 row(s)
+segment.id	time.month	time.year	soma_total
+34854	11	2010	24
+224811	11	2010	12
+128172	11	2010	8
+72536	11	2010	8
+127782	11	2010	8
+173441	11	2010	8
+129781	11	2010	8
+206535	11	2010	8
+65895	11	2010	8
+168703	11	2010	8
+224633	11	2010	8
+14306	11	2010	8
+129193	11	2010	8
+117943	11	2010	8
+208851	11	2010	8
+89585	11	2010	8
+226956	11	2010	4
+226344	11	2010	4
+226238	11	2010	4
+
+
+query 7:
+segment.id	time.month	time.year	soma_total
+160538	2	2018	1184
+160606	2	2018	530
+160607	2	2018	516
+131081	2	2018	318
+172841	2	2018	292
+205851	2	2018	254
+127782	5	2018	213
+132899	2	2018	206
+201751	3	2018	194
+205850	2	2018	158
+223391	2	2018	144
+219103	2	2018	144
+136432	9	2018	142
+111697	10	2018	121
+168703	2	2018	114
+30822	10	2018	110
+202703	5	2018	107
+132899	5	2018	100
+198840	2	2018	98
+22646	2	2018	96
+201751	9	2018	94
+22731	5	2018	91
+155778	10	2018	90
+224922	2	2018	90
+
+Time taken: 100.411 seconds, Fetched: 100 row(s)
+	

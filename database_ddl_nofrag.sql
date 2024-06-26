@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS trabalho_bdd_nofrag;
 
 USE trabalho_bdd_nofrag;
 
-CREATE TABLE IF NOT EXISTS "time"(
+CREATE TABLE IF NOT EXISTS time(
     id int,
     period string,
     day int,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS "time"(
     row format delimited
     fields terminated by ';'
     lines terminated by '\n'
-    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/time'
 ;
 CREATE TABLE IF NOT EXISTS neighborhood(
     id int,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS neighborhood(
     row format delimited
     fields terminated by ';'
     lines terminated by '\n'
-    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/neighborhood'
 ;
 
 CREATE TABLE IF NOT EXISTS district(
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS district(
     row format delimited
     fields terminated by ';'
     lines terminated by '\n'
-    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/district'
 ;
 
 CREATE TABLE IF NOT EXISTS vertice(
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS vertice(
     row format delimited
     fields terminated by ';'
     lines terminated by '\n'
-    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/vertice'
 ;
 
 CREATE TABLE IF NOT EXISTS segment(
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS segment(
     row format delimited
     fields terminated by ';'
     lines terminated by '\n'
-    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/segment'
 ;
 
 CREATE TABLE IF NOT EXISTS crime(
@@ -86,5 +86,5 @@ CREATE TABLE IF NOT EXISTS crime(
     row format delimited
     fields terminated by ';'
     lines terminated by '\n'
-    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/polroute'
+    stored as textfile location 'hdfs://namenode:8020/user/hive/warehouse/trabalho_bdd_nofrag.db/crime'
 ;
