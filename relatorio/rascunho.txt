@@ -4,9 +4,14 @@ O PolRoute é um dataset com informações sobre ocorrências criminais nas ruas
 1) Introdução:
 É um fato bem conhecido que a criminalidade é uma questão aberta, porém importante, na maioria dos centros urbanos ao redor do mundo. Especialmente no Brasil, criar soluções para reduzir os índices de criminalidade é uma prioridade máxima. Para reduzir esses índices, muitas cidades estão adotando técnicas de policiamento preditivo. As técnicas de policiamento preditivo são altamente baseadas na extração de conhecimento valioso de um conjunto massivo de dados que contém informações sobre tempos, locais e tipos de crimes passados. O conhecimento extraído é então utilizado para fornecer insights aos departamentos de polícia, definindo onde a polícia deve manter sua presença. Esses conjuntos de dados também podem ser usados para uma tarefa crítica de policiamento preditivo: definir onde as patrulhas policiais devem atuar. Tais patrulhas são comumente definidas para cobrir uma série de pontos quentes de crime (áreas que apresentam altos níveis de criminalidade) e têm algumas restrições a serem consideradas (número de policiais disponíveis, viaturas, etc.). Portanto, definir a rota de cada veículo policial é um problema complexo de otimização, uma vez que, na maioria dos casos, existem muitos pontos quentes e os recursos disponíveis são escassos, ou seja, a quantidade de veículos e policiais disponíveis é muito menor do que o necessário. Infelizmente, dados de qualidade sobre taxas de criminalidade não são fáceis de obter. Com o objetivo de enfrentar esse problema, este artigo propõe o conjunto de dados PolRoute-DS, um conjunto de dados projetado para fomentar o desenvolvimento e a avaliação de abordagens de roteamento policial em grandes centros urbanos. O PolRoute-DS combina a estrutura espacial da cidade de interesse (no contexto deste artigo, a cidade de São Paulo), representada como um grafo conectado e direcionado de segmentos de ruas, com dados criminais obtidos de fontes públicas.
 
-2) Projeto de distribuição e Apache Hive
-o projeto de distribuição como visto em sala. hive & hadoop: hdfs, schema on read, sem suporte para constrainst , updates, deletes etc, partitioning
-3) Docker, containers e Hive
+motivação do polroute-ds, dataset, e queries
+como lidar com esse grande volume? definição hadoop, datanode e name node
+definição hive
+
+2) O cluster,  e o projeto de distribuição
+o projeto de distribuição como visto em sala. diagrama e descrição dos csv. a definição das queries mais relevantes. diagrama dono-membro e fragmentação horizontal primaria e derivada.
+3) Docker, containers e Hive:
+hive & hadoop: hdfs, schema on read, sem suporte para constrainst , updates, deletes etc, partitioning
 os cinco containers usados: namenode, datanote, hive-server, metastore e o volume com postgres para o metastore. DDL das tabelas e carga para o hive. carga é rapida pois é somente a copia do arquivo para um diretorio no warehouse.
 4) O experimento
 as queries sem frag e com frag e seus tempos de execução. particularidades de cada uma, dificuldades, o problema do OR e UNION e produto cartesiano. prints do uso de cpu. nas queries finais, usar segment ou a uniao de seus fragmentos é equivalente com segment original performando melhor. fragmentar somente crime tão eficiente quanto fragmentar crime e time.
