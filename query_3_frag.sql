@@ -23,8 +23,8 @@ where
     crime_frag_2015.segment_id = segment_frag_2.id
     and (segment_frag_2.start_vertice_id = vertice_frag_2.id OR segment_frag_2.final_vertice_id = vertice_frag_2.id)
     and vertice_frag_2.neighborhood_id = neighborhood_frag.id
-    --and neighborhood_frag.name = 'Santa Efig�nia'
-    and neighborhood_frag.id = 6
+    and neighborhood_frag.name LIKE 'Santa Efig%'
+    --and neighborhood_frag.id = 6
     and crime_frag_2015.time_id = time_frag.id
     and time_frag.year = 2015
 group by neighborhood_frag.name, time_frag.year

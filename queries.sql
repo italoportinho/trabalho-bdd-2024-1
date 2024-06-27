@@ -19,7 +19,7 @@ from
 
 where 
     crime.segment_id = segment.id
-    and (segment.start_vertice_id = vertice.id OR segment.final_vertice_id = vertice.id)
+    and segment.start_vertice_id = vertice.id
     and vertice.district_id = district.id
     and district.name = 'IGUATEMI'
     and crime.time_id = time.id
@@ -124,7 +124,7 @@ where
     crime.segment_id = segment.id
     and (segment.start_vertice_id = vertice.id OR segment.final_vertice_id = vertice.id)
     and vertice.neighborhood_id = neighborhood.id
-    --and neighborhood.name = 'Santa Efig�nia'
+    --and neighborhood.name LIKE 'Santa Efig%'
     and neighborhood.id = 6
     and crime.time_id = time.id
     and time.year = 2015
