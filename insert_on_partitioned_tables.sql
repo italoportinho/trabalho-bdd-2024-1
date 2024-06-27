@@ -115,3 +115,10 @@ SELECT
     FROM crime, time
     WHERE crime.time_id = time.id
     and time.year = 2010;
+
+INSERT OVERWRITE TABLE crime_frag_2018
+SELECT 
+    crime.* 
+    FROM crime, time_frag
+    WHERE crime.time_id = time_frag.id
+    and time_frag.year = 2018;

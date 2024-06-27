@@ -238,29 +238,37 @@ group by segment.id, time.month, time.year order by soma_total DESC
 -- QUERY 7:
 --  Quais os IDs dos segmentos que possuíam o maior índice criminal (soma de ocorrências de todos os tipos de crimes) 
 --  durante os finais de semana do ano de 2018?
--- Time taken: 111.695 seconds, Fetched: 100 row(s)
--- 160538	2	2018	1184
--- 160606	2	2018	530
--- 160607	2	2018	516
--- 131081	2	2018	318
--- 172841	2	2018	292
--- 205851	2	2018	254
--- 127782	5	2018	213
--- 132899	2	2018	206
--- 201751	3	2018	194
--- 205850	2	2018	158
--- 223391	2	2018	144
--- 219103	2	2018	144
--- 136432	9	2018	142
--- 111697	10	2018	121
--- 168703	2	2018	114
--- 30822	10	2018	110
--- 202703	5	2018	107
--- 132899	5	2018	100
+-- Time taken: 104.654 seconds, Fetched: 100 row(s)
+-- 160538	2018	1294
+-- 160606	2018	599
+-- 160607	2018	539
+-- 132899	2018	438
+-- 172841	2018	423
+-- 155778	2018	398
+-- 22731	2018	381
+-- 131081	2018	351
+-- 202703	2018	329
+-- 201751	2018	318
+-- 111697	2018	312
+-- 127455	2018	310
+-- 219011	2018	309
+-- 205851	2018	294
+-- 113146	2018	290
+-- 127782	2018	260
+-- 59483	2018	253
+-- 172454	2018	253
+-- 174522	2018	243
+-- 155260	2018	242
+-- 219103	2018	223
+-- 111676	2018	214
+-- 226199	2018	210
+-- 224922	2018	208
+-- 138518	2018	206
+-- 172820	2018	205
+-- 224945	2018	204
 ----------------------------------------------------------------------------------------------------------------
 select        
     segment.id,
-    time.month,
     time.year,
     sum(crime.total_feminicide) + 
     sum(crime.total_homicide) +
@@ -278,5 +286,5 @@ where
     and crime.time_id = time.id
     and time.year = 2018
     and time.weekday IN ('saturday', 'monday') 
-group by segment.id, time.month, time.year order by soma_total DESC LIMIT 100
+group by segment.id, time.year order by soma_total DESC LIMIT 100
 ;
