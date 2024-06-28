@@ -39,25 +39,16 @@ SELECT
 
 INSERT OVERWRITE TABLE segment_frag_1
 SELECT 
-    segment.id, geometry, segment.oneway, segment.length, segment.final_vertice_id, segment.start_vertice_id
+    segment.*
     FROM segment, vertice_frag_1
-    WHERE segment.start_vertice_id = vertice_frag_1.id
-UNION
-SELECT 
-    segment.id, geometry, segment.oneway, segment.length, segment.final_vertice_id, segment.start_vertice_id
-    FROM segment, vertice_frag_1
-    WHERE segment.final_vertice_id = vertice_frag_1.id
+    WHERE segment.start_vertice_id = vertice_frag_1.id OR segment.final_vertice_id = vertice_frag_1.id;
 ;
 
 INSERT OVERWRITE TABLE segment_frag_2
 SELECT 
-    segment.id, segment.geometry, segment.oneway, segment.length, segment.final_vertice_id, segment.start_vertice_id
+    segment.*
     FROM segment, vertice_frag_2
-    WHERE segment.start_vertice_id = vertice_frag_2.id
-    AND segment.final_vertice_id IN (SELECT 
-    s.id
-    FROM segment s, vertice_frag_2 v2
-    WHERE s.final_vertice_id = v2.id)
+    WHERE segment.start_vertice_id = vertice_frag_2.id OR segment.final_vertice_id = vertice_frag_2.id
 ;
 
 INSERT OVERWRITE TABLE crime_frag_1
