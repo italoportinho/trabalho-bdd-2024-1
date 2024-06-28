@@ -1,0 +1,44 @@
+1) export HIVE_VERSION=4.0.0
+
+2) metastore:
+
+sudo docker run -d -p 9083:9083 --env SERVICE_NAME=metastore --name metastore-standalone apache/hive:${HIVE_VERSION}
+
+3) hiveserver:
+
+sudo docker run -d -p 10000:10000 -p 10002:10002 --env SERVICE_NAME=hiveserver2 --name hiveserver2-standalone apache/hive:${HIVE_VERSION}
+
+
+4) abrir hive command line:
+
+sudo docker exec -it hiveserver2-standalone beeline -u 'jdbc:hive2://0.0.0.0:10000/'
+
+5) Listar containers: 
+
+sudo docker ps -a
+
+6) Dar start em containers já criados que estejam parados:
+
+sudo docker start CONTAINER_ID
+
+o container ID pode ser obtido ao listar os containers existentes.
+
+7) Parar container:
+
+sudo docker stop CONTAINER_ID
+
+8) Remover container:
+
+sudo docker rm CONTAINER_ID
+
+9) Subindo hive e metastore com volumes para guardar os dados :
+
+metastore:
+sudo docker run -d -p 9083:9083 --env SERVICE_NAME=metastore --env DB_DRIVER=postgres --env SERVICE_OPTS="-Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://postgres:5432/template1 -Djavax.jdo.option.ConnectionUserName=postgres -Djavax.jdo.option.ConnectionPassword=34075262" --mount source=warehouse,target=/opt/hive/data/warehouse --mount type=bind,source=`mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout`/postgresql-42.7.3.jar,target=/opt/hive/lib/postgres.jar --name metastore-standalone apache/hive:${HIVE_VERSION}
+
+hiveserver:
+sudo docker run -d -p 10000:10000 -p 10002:10002 --env SERVICE_NAME=hiveserver2 --env SERVICE_OPTS="-Dhive.metastore.uris=thrift://metastore:9083" --mount source=warehouse,target=/opt/hive/data/warehouse --env IS_RESUME="true" --name hiveserver2 apache/hive:${HIVE_VERSION}
+
+
+
+sudo docker start metastore-standalone ; sudo docker start hiveserver2 ; sudo docker exec -it hiveserver2 beeline -u 'jdbc:hive2://0.0.0.0:10000/' --verbose=true;

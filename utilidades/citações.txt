@@ -1,0 +1,19 @@
+citação artigo do google:
+Sanjay Ghemawat, Howard Gobioff, & Shun-Tak Leung (2003). The Google File System. In Proceedings of the 19th ACM Symposium on Operating Systems Principles (pp. 20–43).
+
+citação do PolRoute-DS(ABNT):
+CUNHA SÁ, B.; MULLER, G.; BANNI, M.; SANTOS, W.; LAGE, M.; ROSSETI, I.; FROTA, Y.; DE OLIVEIRA, D. PolRoute-DS: a Crime Dataset for Optimization-based Police Patrol Routing. Journal of Information and Data Management, [S. l.], v. 13, n. 1, 2022. DOI: 10.5753/jidm.2022.2355. Disponível em: https://journals-sol.sbc.org.br/index.php/jidm/article/view/2355. Acesso em: 27 jun. 2024.
+
+citação do PolRoute-DS(ACM):
+Cunha Sá, B., Muller, G., Banni, M., Santos, W., Lage, M., Rosseti, I., Frota, Y. and de Oliveira, D. 2022. PolRoute-DS: a Crime Dataset for Optimization-based Police Patrol Routing. Journal of Information and Data Management. 13, 1 (Aug. 2022). DOI:https://doi.org/10.5753/jidm.2022.2355.
+
+citação do livro da disciplina: Özsu, M. Tamer, Valduriez, P.
+Özsu, M. Tamer, Valduriez, P. (2011) “Principles of Distributed Database Systems - Third Edition”, p.81-98. Springer
+
+
+the google file system:
+https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf
+
+https://en.wikipedia.org/wiki/Apache_Hadoop
+
+https://www.geeksforgeeks.org/google-file-system/
