@@ -19,35 +19,12 @@ from
 
 where 
     crime.segment_id = segment.id
-    and segment.start_vertice_id = vertice.id
+    and (segment.start_vertice_id = vertice.id OR segment.start_vertice_id = vertice.id)
     and vertice.district_id = district.id
     and district.name = 'IGUATEMI'
     and crime.time_id = time.id
     and time.year = 2016
-    group by crime.segment_id
-UNION
-select
-    crime.segment_id,
-    sum(crime.total_feminicide),
-    sum(crime.total_homicide),
-    sum(crime.total_felony_murder),
-    sum(crime.total_bodily_harm),
-    sum(crime.total_theft_cellphone),
-    sum(crime.total_armed_robbery_cellphone),
-    sum(crime.total_theft_auto),
-    sum(crime.total_armed_robbery_auto)
-from
-    vertice, district, segment, crime, time
-
-where 
-    crime.segment_id = segment.id
-    and segment.final_vertice_id = vertice.id
-    and vertice.district_id = district.id
-    and district.name = 'IGUATEMI'
-    and crime.time_id = time.id
-    and time.year = 2016
-    group by crime.segment_id
-;
+    group by crime.segment_id;
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -71,35 +48,12 @@ from
 
 where 
     crime.segment_id = segment.id
-    and segment.start_vertice_id = vertice.id
+    and (segment.start_vertice_id = vertice.id OR segment.final_vertice_id = vertice.id)
     and vertice.district_id = district.id
     and district.name = 'IGUATEMI'
     and crime.time_id = time.id
     and time.year between 2006 and 2016 
-    group by crime.segment_id
-UNION
-select
-    crime.segment_id,
-    sum(crime.total_feminicide),
-    sum(crime.total_homicide),
-    sum(crime.total_felony_murder),
-    sum(crime.total_bodily_harm),
-    sum(crime.total_theft_cellphone),
-    sum(crime.total_armed_robbery_cellphone),
-    sum(crime.total_theft_auto),
-    sum(crime.total_armed_robbery_auto)
-from
-    vertice, district, segment, crime, time
-
-where 
-    crime.segment_id = segment.id
-    and segment.final_vertice_id = vertice.id
-    and vertice.district_id = district.id
-    and district.name = 'IGUATEMI'
-    and crime.time_id = time.id
-    and time.year between 2006 and 2016 
-    group by crime.segment_id
-;
+    group by crime.segment_id;
 
 ----------------------------------------------------------------------------------------------------------------
 -- QUERY 3:
@@ -128,29 +82,7 @@ where
     and neighborhood.id = 6
     and crime.time_id = time.id
     and time.year = 2015
-group by neighborhood.name, time.year
-UNION
-select
-    --neighborhood.name,
-    time.year,
-    sum(crime.total_theft_cellphone),
-    sum(crime.total_armed_robbery_cellphone),
-    sum(crime.total_theft_auto),
-    sum(crime.total_armed_robbery_auto)
-from
-    vertice, neighborhood, segment, crime, time
-
-where 
-    crime.segment_id = segment.id
-    and segment.final_vertice_id = vertice.id
-    and vertice.neighborhood_id = neighborhood.id
-    --and neighborhood.name = 'Santa Efig�nia'
-    and neighborhood.id = 6
-    and crime.time_id = time.id
-    and time.year = 2015
-group by --neighborhood.name, 
-time.year
-;
+group by neighborhood.name, time.year;
 
 ----------------------------------------------------------------------------------------------------------------
 -- QUERY 4:
