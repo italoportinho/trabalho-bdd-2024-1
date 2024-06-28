@@ -2,17 +2,51 @@ Resumo
 O PolRoute é um dataset com informações sobre ocorrências criminais nas ruas de São Paulo com o propósito de servir como base de conhecimento para propor rotas de patrulhamento policial eficientes. Dada a grande cardinalidade do conjunto de dados este trabalho propõe um projeto de distribuição utilizando fragmentação horizontal para o banco de dados originado do dataset, utilizando o middleware Apache Hive para prover paralelismo no processamento das consultas. Partindo de 7 consultas propostas, comparamos o desempenho do processamento delas em um schema sem fragmentação com um schema fragmentado chegando à conclusão que o desempenho aumenta consideravelmente com a fragmentação, porém dependendo do tamanho da tabela, pode não valer a pena fragmenta-la.
 
 1) Introdução:
-É um fato bem conhecido que a criminalidade é uma questão aberta, porém importante, na maioria dos centros urbanos ao redor do mundo. Especialmente no Brasil, criar soluções para reduzir os índices de criminalidade é uma prioridade máxima. Para reduzir esses índices, muitas cidades estão adotando técnicas de policiamento preditivo. As técnicas de policiamento preditivo são altamente baseadas na extração de conhecimento valioso de um conjunto massivo de dados que contém informações sobre tempos, locais e tipos de crimes passados. O conhecimento extraído é então utilizado para fornecer insights aos departamentos de polícia, definindo onde a polícia deve manter sua presença. Esses conjuntos de dados também podem ser usados para uma tarefa crítica de policiamento preditivo: definir onde as patrulhas policiais devem atuar. Tais patrulhas são comumente definidas para cobrir uma série de pontos quentes de crime (áreas que apresentam altos níveis de criminalidade) e têm algumas restrições a serem consideradas (número de policiais disponíveis, viaturas, etc.). Portanto, definir a rota de cada veículo policial é um problema complexo de otimização, uma vez que, na maioria dos casos, existem muitos pontos quentes e os recursos disponíveis são escassos, ou seja, a quantidade de veículos e policiais disponíveis é muito menor do que o necessário. Infelizmente, dados de qualidade sobre taxas de criminalidade não são fáceis de obter. Com o objetivo de enfrentar esse problema, este artigo propõe o conjunto de dados PolRoute-DS, um conjunto de dados projetado para fomentar o desenvolvimento e a avaliação de abordagens de roteamento policial em grandes centros urbanos. O PolRoute-DS combina a estrutura espacial da cidade de interesse (no contexto deste artigo, a cidade de São Paulo), representada como um grafo conectado e direcionado de segmentos de ruas, com dados criminais obtidos de fontes públicas.
+É um fato bem conhecido que a criminalidade é uma questão aberta, porém importante, na maioria dos centros urbanos ao redor do mundo. Especialmente no Brasil, criar soluções para reduzir os índices de criminalidade é uma prioridade máxima. Para reduzir esses índices, muitas cidades estão adotando técnicas de policiamento preditivo. As técnicas de policiamento preditivo são altamente baseadas na extração de conhecimento valioso de um conjunto massivo de dados que contém informações sobre tempos, locais e tipos de crimes passados. O conhecimento extraído é então utilizado para fornecer insights aos departamentos de polícia, definindo onde a polícia deve manter sua presença. Esses conjuntos de dados também podem ser usados para uma tarefa crítica de policiamento preditivo: definir onde as patrulhas policiais devem atuar. Tais patrulhas são comumente definidas para cobrir uma série de pontos quentes de crime (áreas que apresentam altos níveis de criminalidade) e têm algumas restrições a serem consideradas (número de policiais disponíveis, viaturas, etc.). Portanto, definir a rota de cada veículo policial é um problema complexo de otimização, uma vez que, na maioria dos casos, existem muitos pontos quentes e os recursos disponíveis são escassos, ou seja, a quantidade de veículos e policiais disponíveis é muito menor do que o necessário. Infelizmente, dados de qualidade sobre taxas de criminalidade não são fáceis de obter. Com o objetivo de enfrentar esse problema, este artigo propõe o conjunto de dados PolRoute-DS, um conjunto de dados projetado para fomentar o desenvolvimento e a avaliação de abordagens de roteamento policial em grandes centros urbanos. O PolRoute-DS combina a estrutura espacial da cidade de interesse (no contexto deste artigo, a cidade de São Paulo), representada como um grafo conectado e direcionado de segmentos de ruas, com dados criminais obtidos de fontes públicas.[citação artigo]
+
+O dataset é composto de 6 arquivos csv com informações sobre o tipo de ocorrência criminal, em qual bairro/distrito, segmento de rua com seus vértices, e em qual período de tempo separado por ano, mÊs, dia da semana , dia e período do dia. Os arquivo são: time.csv, crime.csv, segment.csv, vertice.csv, district.csv e neighborhood.csv. abaixo especficicamos um schema com as relações para guiar o resto do trabalho:
+
+district(id, name, geometry)
+neighborhood(id, name, geometry)
+time(id int, period, day, month, year, weekday)
+vertice(id, label, district_id, neighborhood_id, zone_id)
+	district_id referencia district(id)
+	neighborhood_id referencia neighborhood(id)
+segment(id, geometry, oneway, length, final_vertice_id, start_vertice_id)
+	final_vertice_id referencia vertice(id)
+	start_vertice_id referencia vertice(id)
+crime(id, total_feminicide, total_homicide, total_felony_murder, total_bodily_harm, total_theft_cellphone, total_armed_robbery_cellphone, total_theft_auto, total_armed_robbery_auto,     segment_id, time_id)
+
+Partindo de 7 perguntas sobre o dataset, esse trabalho propoe nas próximas sessões traduzir elas para a linguagem SQL, criar um projeto de distribuição para o banco de dados, e executar as consultas em um cluster operando um middleware que proporcione processamento distribuído dessas consultas. Mais do que obter o resultado das perguntas propostas, vamos comparar o tempo médio de processamento das consultas sem o projeto de distribuição aplicado ás tabelas com o projeto de distribuição aplicado às tabelas. As perguntas propostas são:
+
+1) Qual o total de crimes por tipo e por segmento das ruas do distrito de IGUATEMI durante o ano de 2016?
+2) Qual o total de crimes por tipo e por segmento das ruas do distrito de IGUATEMI entre 2006 e 2016?
+3) Qual o total de ocorrências de Roubo de Celular e roubo de carro no bairro de SANTA EFIGÊNIA em 2015?
+4) Qual o total de crimes por tipo em vias de mão única da cidade durante o ano de 2012?
+5) Qual o total de roubos de carro e celular em todos os segmentos durante o ano de 2017?
+6) Quais os IDs de segmentos que possuíam o maior índice criminal (soma de ocorrências de todos os tipos de crimes) , durante o mês de Novembro de 2010?
+7) Quais os IDs dos segmentos que possuíam o maior índice criminal (soma de ocorrências de todos os tipos de crimes) durante os finais de semana do ano de 2018?
 
 motivação do polroute-ds, dataset, e queries
 como lidar com esse grande volume? definição hadoop, datanode e name node
 definição hive
 
-2) O cluster,  e o projeto de distribuição
+2) o projeto de distribuição
 o projeto de distribuição como visto em sala. diagrama e descrição dos csv. a definição das queries mais relevantes. diagrama dono-membro e fragmentação horizontal primaria e derivada.
+
+Primeiramente vamos descrever as perguntas proposta na seção anterior na linguagem SQL, para que possamos analisar melhor as dependências entre as tabelas e quais atributos serão usados em cada consulta. Ficam então as perguntas traduzidas em 7 consultas SQL descritas abaixo:
+
+Uma vez de posse das consultas mais frequentes no banco de dados, vamos expressar as relações entre as tabelas com um diagrama dono-membro(figura 1) com o propósito determinar quais receberão uma fragmentação horizontal primária(FHP) e quais terão fragmentação horizontal(FHD) a partir destas. Analisando o didagrama, determinsa-se que as tabelas crime, district e neighborhood receberão fragmentação horizontal primária. A tabela vértice receberá fragmentação horizontal derivada da tabela district, pois possui duas junções com essa tabela e apenas um com neighborhood. Pelo mesmo motivo a tabela crime reberá fragmentação horizontal derivada da tabela time, pois possuí mais junções com essa tabela do que com a tabela segment.[citação livro]
+
+predicados simples, mintermos
+
 3) Docker, containers e Hive:
 hive & hadoop: hdfs, schema on read, sem suporte para constrainst , updates, deletes etc, partitioning
 os cinco containers usados: namenode, datanote, hive-server, metastore e o volume com postgres para o metastore. DDL das tabelas e carga para o hive. carga é rapida pois é somente a copia do arquivo para um diretorio no warehouse.
+
+
 4) O experimento
 as queries sem frag e com frag e seus tempos de execução. particularidades de cada uma, dificuldades, o problema do OR e UNION e produto cartesiano. prints do uso de cpu. nas queries finais, usar segment ou a uniao de seus fragmentos é equivalente com segment original performando melhor. fragmentar somente crime tão eficiente quanto fragmentar crime e time.
+
+
 5) Conclusão
